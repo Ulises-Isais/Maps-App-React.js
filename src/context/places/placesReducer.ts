@@ -1,6 +1,10 @@
+import type { Feature } from "../../interfaces/places";
 import type { PlacesState } from "./PlacesProvider";
 
-type PlacesAction = { type: "setUserLocation"; payload: [number, number] };
+type PlacesAction =
+  | { type: "setUserLocation"; payload: [number, number] }
+  | { type: "setLoadingPlaces" }
+  | { type: "setPlaces"; payload: Feature[] };
 
 export const placesReducer = (
   state: PlacesState,
@@ -14,6 +18,14 @@ export const placesReducer = (
         userLocation: action.payload,
       };
 
+    case "setLoadingPlaces":
+      return { ...state, isLoadingPlaces: true, places: [] };
+    case "setPlaces":
+      return {
+        ...state,
+        isLoadingPlaces: false,
+        places: action.payload,
+      };
     default:
       return state;
   }
