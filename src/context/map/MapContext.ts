@@ -3,6 +3,8 @@ import { createContext } from "react";
 interface MapContextProps {
   isMapReady: boolean;
   map?: mapboxgl.Map;
+  distance?: number; //kms
+  duration?: number; //minutes
 
   //Methods
   setMap: (map: mapboxgl.Map) => void;

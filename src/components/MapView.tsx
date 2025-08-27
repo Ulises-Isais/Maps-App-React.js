@@ -5,7 +5,8 @@ import { Loading } from "./Loading";
 const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 export const MapView = () => {
-  const { isLoading, userLocation } = useContext(PlacesContext);
+  const { isLoading, userLocation, setUserLocation, selecting, setSelecting } =
+    useContext(PlacesContext);
   const { setMap } = useContext(MapContext);
   const mapDiv = useRef<HTMLDivElement>(null);
 
@@ -22,22 +23,28 @@ export const MapView = () => {
 
       setMap(map);
 
+      map.on("click", (e) => {
+        if (!selecting) return;
+        const coords: [number, number] = [e.lngLat.lng, e.lngLat.lat];
+        setUserLocation(coords);
+        setSelecting(false);
+      });
+
       // Limpiar el mapa al desmontar
       return () => {
         map.remove();
       };
     }
-  }, [isLoading, userLocation]);
+  }, [isLoading, userLocation, selecting]);
 
   if (isLoading) {
     return <Loading />;
   }
   return (
-    <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
+    <div>
       <div
         ref={mapDiv}
         style={{
-          backgroundColor: "red",
           height: "100vh",
           width: "100vw",
           position: "fixed",
@@ -45,9 +52,7 @@ export const MapView = () => {
           left: 0,
         }}
       />
-      <div style={{ position: "absolute", top: 10, color: "black" }}>
-        {userLocation?.join(",")}
-      </div>
+      <div>{userLocation?.join(",")}</div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+export { BtnSelectLocation } from "./BtnSelectLocation";
 export { LoadingPlaces } from "./LoadingPlaces";
 export { SearchResults } from "./SearchResults";
 export { SearchBar } from "./SearchBar";

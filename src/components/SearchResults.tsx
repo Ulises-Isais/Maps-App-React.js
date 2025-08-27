@@ -5,7 +5,8 @@ import type { Feature } from "../interfaces/places";
 
 export const SearchResults = () => {
   const { places, isLoadingPlaces, userLocation } = useContext(PlacesContext);
-  const { map, getRouteBetweenPoints } = useContext(MapContext);
+  const { map, getRouteBetweenPoints, distance, duration } =
+    useContext(MapContext);
 
   const [activeId, setActiveId] = useState("");
 
@@ -37,23 +38,36 @@ export const SearchResults = () => {
       {places.map((place) => (
         <li
           key={place.id}
-          className={`active list-group-item list-group-item-action pointer ${
+          className={`list-group-item list-group-item-action pointer ${
             activeId === place.id ? "active" : ""
           }`}
           onClick={() => onPlaceClick(place)}
         >
           <h6>{place.text_es}</h6>
           <p style={{ fontSize: "12px" }}>{place.place_name}</p>
-          <button
-            onClick={() => getRoute(place)}
-            className={`btn btn-sm ${
-              activeId === place.id
-                ? "btn-outline-light"
-                : "btn-outline-primary"
-            } `}
-          >
-            Direcciones
-          </button>
+
+          <div className="d-flex align-items-center gap-2">
+            <button
+              onClick={() => getRoute(place)}
+              className={`btn btn-sm ${
+                activeId === place.id
+                  ? "btn-outline-light"
+                  : "btn-outline-primary"
+              } `}
+            >
+              Direcciones
+            </button>
+            {/* Mostrar kms y minutos si es la ruta activa */}
+            {activeId === place.id && distance && duration && (
+              <span
+                style={{
+                  fontSize: "14px",
+                }}
+              >
+                {distance} km - {duration} min
+              </span>
+            )}
+          </div>
         </li>
       ))}
     </ul>

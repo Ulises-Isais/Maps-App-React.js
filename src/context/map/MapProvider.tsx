@@ -12,12 +12,16 @@ export interface MapsState {
   isMapReady: boolean;
   map?: mapboxgl.Map;
   markers: mapboxgl.Marker[];
+  distance?: number; //kms
+  duration?: number; //minutes
 }
 
 const INITIAL_STATE: MapsState = {
   isMapReady: false,
   map: undefined,
   markers: [],
+  distance: undefined,
+  duration: undefined,
 };
 
 interface Props {
@@ -45,8 +49,6 @@ export const MapProvider = ({ children }: Props) => {
 
       newMarkers.push(newMarker);
     }
-
-    //Todo: limpiar polylines
 
     dispatch({ type: "setMarkers", payload: newMarkers });
   }, [places]);
@@ -82,6 +84,11 @@ export const MapProvider = ({ children }: Props) => {
     const minutes = Math.floor(duration / 60);
     console.log({ kms, minutes });
 
+    dispatch({
+      type: "setRouteInfo",
+      payload: { distance: kms, duration: minutes },
+    });
+
     const bounds = new window.mapboxgl.LngLatBounds(start, start);
 
     for (const coord of coords) {
@@ -111,7 +118,6 @@ export const MapProvider = ({ children }: Props) => {
       },
     };
 
-    //TODO REMOVER POLYLINE
     if (state.map?.getLayer("RouteString")) {
       state.map.removeLayer("RouteString");
       state.map.removeSource("RouteString");
@@ -138,6 +144,8 @@ export const MapProvider = ({ children }: Props) => {
     <MapContext.Provider
       value={{
         ...state,
+        distance: state.distance,
+        duration: state.duration,
 
         //Methods
         setMap,
