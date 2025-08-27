@@ -1,69 +1,45 @@
-# React + TypeScript + Vite
+# 🗺️ Maps App con React.js
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación interactiva de mapas construida con React.js, TypeScript y Vite. Permite al usuario explorar lugares, obtener direcciones y visualizar rutas en un mapa interactivo.
 
-Currently, two official plugins are available:
+## 🔹 Demo en vivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> 👉[Puedes ver la aplicación funcionando aquí ](https://maps-app-reactjs.netlify.app/)
 
-## Expanding the ESLint configuration
+## 🚀 Características
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Mapa interactivo**: Visualiza ubicaciones y direcciones en un mapa dinámico.
+- **Búsqueda de lugares**: Encuentra lugares cercanos y selecciona ubicaciones en el mapa.
+- **Direcciones**: Obtén direcciones entre tu ubicación y otros lugares.
+- **Modo de selección**: Activa el modo de selección para elegir una ubicación en el mapa.
+- **Distancia y tiempo**: Visualiza kilómetros y minutos de ruta al lado del botón de direcciones.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📸 Capturas de pantalla
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+![Mapa interactivo](./screenshots/map-view.png)
+![Mapa Resultados de busqueda y rutas](./screenshots/rutas.png)
+![Modo selección](./screenshots/boton.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Tecnologías utilizadas
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **React.js**: Biblioteca para construir interfaces de usuario.
+- **TypeScript**: Superset de JavaScript que agrega tipado estático.
+- **Vite**: Herramienta de construcción rápida para proyectos de frontend.
+- **Mapbox GL JS**: Biblioteca para renderizar mapas interactivos.
+- **Axios**: Para realizar llamadas HHTP a APIs.
+- **Bootstrap 5**: Estilos CSS y componentes listos para usar.
+- **React Context API**: Manejo de estado global para compartir datos entre componentes.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧪 Cómo usar
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Mi ubicación: Botón para centrar el mapa en tu ubicación actual.
+
+2. Seleccionar ubicación: Activa el modo de selección y haz click en el mapa para definir tu ubicación.
+
+3. Direcciones: Haz click en un lugar y luego en "Direcciones" para trazar la ruta.
+
+4. Resultados de búsqueda: Visualiza lugares cercanos con distancia y tiempo al lado del botón de direcciones.
+
+## 👨‍💻 Autor
+
+**Ulises Isais**
